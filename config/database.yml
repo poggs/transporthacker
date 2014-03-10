@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgis
+  encoding: unicode
+  postgis_extension: true
+  #schema_search_path: public,postgis
+  pool: 5
+  username: transporthacker
+  password: transporthacker
+
+development:
+  <<: *default
+  database: transporthacker_development
+
+test: &test
+  <<: *default
+  database: transporthacker_test
+
+production:
+  <<: *default
+  database: transporthacker_production
+
+cucumber:
+  <<: *test

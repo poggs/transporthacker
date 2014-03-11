@@ -1,8 +1,6 @@
 default: &default
-  adapter: postgis
-  encoding: unicode
-  postgis_extension: true
-  #schema_search_path: public,postgis
+  adapter: postgresql
+  encoding: utf8
   pool: 5
   username: transporthacker
   password: transporthacker

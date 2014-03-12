@@ -32,8 +32,12 @@ end
 
 # Testing
 
-group :test do
-  gem 'rspec-rails', '~> 3.0.0.beta'
+group :development, :test do
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+  gem 'guard'
+  gem 'guard-rspec', '~> 4.2.7'
+  gem 'rb-fsevent' if `uname` =~ /Darwin/
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
 end

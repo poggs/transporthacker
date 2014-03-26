@@ -10,12 +10,13 @@ class TransportHacker
 
         def initialize(xml=nil)
 
-          if xml
-            struct = Hash.from_xml(xml)
-            self.publication_type = struct['type']
-            if struct.has_key? 'publicationCreator'
-              self.publication_creator = TransportHacker::Datex2::InternationalIdentifier.new(struct['publicationCreator'].to_xml)
-            end
+          return if xml.nil?
+          struct = (xml.is_a? String) ? Hash.from_xml(xml) : xml
+
+          self.publiciation_type = struct['xsi:type']
+
+          if !(struct['payloadPublication'].nil?) && (struct['payloadPublication'].has_key? 'publicationCreator')
+            self.publication_creator = TransportHacker::Datex2::NationalIdentifier.new(struct['payloadPublication'])
           end
 
         end

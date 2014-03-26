@@ -10,14 +10,15 @@ class TransportHacker
 
         def initialize(xml=nil)
 
-          if xml
-            struct = Hash.from_xml(xml)
-            identifier = InternationalIdentifier.new(struct.to_xml)
-            if struct['hash'].has_key? 'supplierIdentification'
-              self.supplier_identification = identifier
-            elsif struct['hash'].has_key? 'publicationCreator'
-              self.publication_creator = identifier
-            end
+          return if xml.nil?
+          struct = (xml.is_a? String) ? Hash.from_xml(xml) : xml
+
+          identifier = NationalIdentifier.new(struct)
+
+          if struct.has_key? 'supplierIdentification'
+            self.supplier_identification = identifier
+          elsif struct.has_key? 'publicationCreator'
+            self.publication_creator = identifier
           end
 
         end

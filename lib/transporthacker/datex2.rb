@@ -1,5 +1,5 @@
 require 'transporthacker/datex2/d2_logical_model'
-require 'transporthacker/datex2/international_identifier'
+require 'transporthacker/datex2/national_identifier'
 
 class TransportHacker
 

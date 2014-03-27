@@ -1,3 +1,6 @@
+require 'transporthacker/datex2/d2_logical_model/payload_publication/header_information'
+require 'transporthacker/datex2/d2_logical_model/payload_publication/predefined_location_set'
+
 class TransportHacker
 
   class Datex2
@@ -6,7 +9,7 @@ class TransportHacker
 
       class PayloadPublication
 
-        attr_accessor :publiciation_type, :publication_creator
+        attr_accessor :publiciation_type, :publication_creator, :publication_time, :header_information
 
         def initialize(xml=nil)
 
@@ -17,6 +20,14 @@ class TransportHacker
 
           if !(struct['payloadPublication'].nil?) && (struct['payloadPublication'].has_key? 'publicationCreator')
             self.publication_creator = TransportHacker::Datex2::NationalIdentifier.new(struct['payloadPublication'])
+          end
+
+          if !(struct['payloadPublication'].nil?) && (struct['payloadPublication'].has_key? 'publicationTime')
+            self.publication_time = Time.parse(struct['payloadPublication']['publicationTime'])
+          end
+
+          if !(struct['payloadPublication'].nil?) && (struct['payloadPublication'].has_key? 'headerInformation')
+            self.header_information = TransportHacker::Datex2::D2LogicalModel::PayloadPublication::HeaderInformation.new(struct['payloadPublication']['publicationTime'])
           end
 
         end

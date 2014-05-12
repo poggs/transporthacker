@@ -1,0 +1,49 @@
+<div class="row">
+ <div class="col-md-12">
+  <form role="form">
+   <div class="form-group">
+    <input type="busStopName" name="stop_id" class="form-control" id="busStopName" placeholder="Enter a bus stop name">
+    <button type="submit" class="btn btn-primary">Go</button>
+   </div>
+  </form>
+ </div>
+</div>
+
+<% if @countdown %>
+ <% @countdown.each do |c| %>
+<div class="row countdown">
+ <div class="col-md-1 text-left">x</div>
+ <div class="col-md-9 text-left"><%= c.destination %></div>
+ <div class="col-md-2 text-right"><%= c.due %></div>
+</div>
+ <% end %>
+<% end %>
+
+<% content_for :script do %>
+
+  var element = $('#busStopName');
+
+  var busStopLocationSource = new Bloodhound({
+    name: 'bus_stops',
+    remote: 'lookup.json?q=%QUERY',
+    datumTokenizer: function(d) {
+      return Bloodhound.tokenizers.whitespace(d.val)
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+  })
+
+  busStopLocationSource.initialize()
+
+  element.typeahead({
+    minLength: 3,
+    highlight: true
+  }, {
+    name: 'bus_stop',
+    source: busStopLocationSource.ttAdapter(),
+    templates: {
+      empty: Handlebars.compile('<p>Nothing matched</p>'),
+      suggestion: Handlebars.compile('<p>{{descr}}</p>')
+    }
+  })
+
+<% end %>

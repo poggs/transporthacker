@@ -20,6 +20,8 @@ gem 'unicorn'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-sass'
 gem 'leaflet-rails'
+gem 'twitter-typeahead-rails'
+gem 'handlebars_assets'
 
 
 # Development

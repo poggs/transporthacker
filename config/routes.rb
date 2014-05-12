@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get 'bus', to: 'bus#index'
   get 'tube', to: 'tube#index'
 
+  get 'lookup', to: 'lookup#index'
+
 end

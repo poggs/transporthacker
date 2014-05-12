@@ -8,28 +8,22 @@ class TransportHacker
 
         class PredefinedLocationSet
 
-            class PredefinedLocation
+          class PredefinedLocation
 
-            attr_accessor :location_set_id, :location_set_name, :location_set
+            attr_accessor :location_id, :location_name
 
             def initialize(xml=nil)
 
               return if xml.nil?
               struct = (xml.is_a? String) ? Hash.from_xml(xml) : xml
 
-              self.location_set = []
+              if !(struct['predefinedLocation'].nil?) && (struct['predefinedLocation'].has_key? 'id')
+                self.location_id = struct['predefinedLocation']['id']
+              end
 
-              # if !(struct['predefinedLocationSet'].nil?) && (struct['predefinedLocationSet'].has_key? 'id')
-              #   self.location_set_id = struct['predefinedLocationSet']['id']
-              # end
-              # 
-              # if !(struct['predefinedLocationSet'].nil?) && (struct['predefinedLocationSet'].has_key? 'predefinedLocationSetName')
-              #   self.location_set_name = struct['predefinedLocationSet']['predefinedLocationSetName']
-              # end
-              # 
-              # if !(struct['predefinedLocationSet'].nil?) && (struct['predefinedLocationSet'].has_key? 'predefinedLocation')
-              #   self.location_set << 'foo'
-              # end
+              if !(struct['predefinedLocation'].nil?) && (struct['predefinedLocation'].has_key? 'predefinedLocationName')
+                self.location_name = TransportHacker::Datex2::I18nValue.new(struct['predefinedLocation']['predefinedLocationName'])
+              end
 
             end
 

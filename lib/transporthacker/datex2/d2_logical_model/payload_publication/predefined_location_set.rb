@@ -28,6 +28,11 @@ class TransportHacker
             end
 
             if !(struct['predefinedLocationSet'].nil?) && (struct['predefinedLocationSet'].has_key? 'predefinedLocation')
+
+              if struct['predefinedLocationSet']['predefinedLocation'].class != Array
+                struct['predefinedLocationSet']['predefinedLocation'] = [ struct['predefinedLocationSet']['predefinedLocation'] ]
+              end
+
               struct['predefinedLocationSet']['predefinedLocation'].each do |predefined_location|
                 self.location_set << TransportHacker::Datex2::D2LogicalModel::PayloadPublication::PredefinedLocationSet::PredefinedLocation.new(predefined_location)
               end

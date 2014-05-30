@@ -22,6 +22,7 @@ gem 'font-awesome-sass'
 gem 'leaflet-rails'
 gem 'twitter-typeahead-rails'
 gem 'handlebars_assets'
+gem 'activerecord-import-queue'
 
 
 # Development

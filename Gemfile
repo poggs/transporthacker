@@ -18,6 +18,7 @@ gem 'unicorn'
 # Application-specific gems
 
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'leaflet-rails'
 gem 'twitter-typeahead-rails'

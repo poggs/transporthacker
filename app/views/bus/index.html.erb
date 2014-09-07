@@ -9,15 +9,41 @@
  </div>
 </div>
 
-<% if @countdown %>
- <% @countdown.each do |c| %>
-<div class="row countdown">
- <div class="col-md-1 text-left">x</div>
- <div class="col-md-9 text-left"><%= c.destination %></div>
- <div class="col-md-2 text-right"><%= c.due %></div>
-</div>
- <% end %>
+<% if @result %>
+
+<div class="row">
+ <div class="col-md-6 col-md-offset-3">
+
+<table class="table bus-table">
+ <thead>
+  <tr>
+   <th class="col-md-2">Route</th>
+   <th class="col-md-2">Registration</th>
+   <th class="col-md-6">Destination</th>
+   <th class="col-md-2">Due</th>
+  </tr>
+ </thead>
+ <tbody>
+
+<% @result.each do |r| %>
+  <tr>
+  <% if r.is_a? TransportHacker::Tfl::CountdownData::PredictionArray %>
+   <td><%= r.line_name %></td>
+   <td><%= r.registration_number %></td>
+   <td><%= r.destination_text %></td>
+   <td><%= (Time.at(r.estimated_time / 1000) - Time.now).to_i / 60 %> min</td>
+  <% else %>
+  <% end %>
+  </tr>
 <% end %>
+
+ </tbody>
+</table>
+
+<% end %>
+
+ </div>
+</div>
 
 <% content_for :script do %>
 

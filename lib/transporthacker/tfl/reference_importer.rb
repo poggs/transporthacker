@@ -16,9 +16,6 @@ class TransportHacker
       end
 
       def import_bus_stops
-        CSV.foreach('data/tfl-bus-stops.csv') do |rec|
-          process_bus_stop(rec)
-        end
       end
 
       private
